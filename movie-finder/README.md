@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Movie-Finder
 
-## Getting Started
+Aplicação React para busca de filmes consumindo a [OMDb API](https://www.omdbapi.com/).
 
-First, run the development server:
+## 🚀 Como executar
 
-```bash
-npm run dev
+Clone o repositório
+`npm install`
+Crie um arquivo `.env` com sua API_KEY
+`npm run dev`
 # or
-yarn dev
+`yarn dev`
 # or
-pnpm dev
+`pnpm dev`
 # or
-bun dev
-```
+`bun dev`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [x] Busca por título
+- [x] Página de detalhes
+- [ ] Filtros por gênero (em desenvolvimento)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Abre [http://localhost:3000](http://localhost:3000) com o seu navegador para ver o resultado.
+Podes começar por editando `app/page.tsx`.
 
-## Learn More
+# Desafio
+O meu maior desafio está sendo consumir a imagem da api, tudo porque está a me retornar erro de proxy:net::ERR_CONNECTION_TIMED_OUT, porém tirando isso tudo está OK!!
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Desenvolvedor
+Nome: Mário Matias
+GitHub[]
+Facebook[]

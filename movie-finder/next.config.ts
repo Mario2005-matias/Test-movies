@@ -1,13 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'm.media-amazon.com', // Para posters da OMDb
-      },
-    ],
+    domains: ['image.tmdb.org'],
   },
 };
-
 module.exports = nextConfig;
