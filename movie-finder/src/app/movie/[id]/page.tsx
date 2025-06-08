@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Header from "../components/Header";
-import { Calendar, StarIcon } from "lucide-react"
-
+import { FaCalendar, FaStar } from "react-icons/fa";
+import { FaUser, FaChild } from "react-icons/fa";
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 async function getMovie(id: string) {
@@ -16,7 +16,7 @@ async function getMovie(id: string) {
 
 export default async function MoviePage({
   params,
-}: {
+}:{
   params: { id: string };
 }) {
   const movie = await getMovie(params.id);
@@ -24,46 +24,69 @@ export default async function MoviePage({
   if (!movie) return notFound();
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className="w-full min-h-screen flex flex-col items-center">
       <Header />
-      <div className="max-w-4xl grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="rounded-md shadow mb-4 max-w-md px-2 ">
-            <Image
-              src={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                  : "/placeholder.png"
-              }
-              alt={movie.title}
-              width={100}
-              height={100}
-              className="object-fill"
-            />
-        </div>
-        <div className="text-sm">
-          <h1 className="text-2xl font-bold mb-4">{movie.title}</h1>
-          <div className="flex flex-row items-center gap-2">
+      <div className="w-full h-full flex flex-row flex-wrap justify-center gap-6 pt-10">
+        <Image
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : "/placeholder.png"
+          }
+          alt={movie.title}
+          width={300}
+          height={400}
+          className="rounded-md max-sm:w-[90%]"
+        />
+        <div className="max-w-lg  max-md:mb-10 max-sm:w-[90%] px-2">
+          <h1 className="text-2xl font-bold mb-6">{movie.title}</h1>
+          <div className="flex flex-row items-center gap-4">
             <div className="flex flex-row items-center justify-center gap-2">
-                <p className={`${movie.adult} ? "bg-red-500" : "bg-white"`}>adult</p>
+              <p
+                className={`text-white py-1 px-2 rounded ${
+                  movie.adult ? "bg-red-500" : "bg-green-500"
+                }`}
+                title={movie.adult ? "Adulto" : "Criança"}
+              >
+                {movie.adult ? (
+                  <p className="flex flex-row gap-1 items-center justify-center">
+                    <FaUser /> Adulto
+                  </p>
+                ) : (
+                  <p className="flex flex-row gap-2 items-center justify-center">
+                    <FaChild /> Criança
+                  </p>
+                )}
+              </p>
             </div>
-            <div className="flex flex-row items-center justify-center gap-2">
-                <Calendar/>
-                <p>{movie.release_date}</p>
+            <div className="flex flex-row items-center justify-center gap-1">
+              <FaCalendar />
+              <p>{movie.release_date}</p>
             </div>
-            <div className="flex flex-row items-center justify-center gap-2">
-                <StarIcon/>
-                <p>{movie.vote_count}</p>
+            <div className="flex flex-row items-center justify-center gap-1">
+              <FaStar className="text-yellow-400" />
+              <p>{movie.vote_count}</p>
             </div>
           </div>
 
-          <p className="mt-2">{movie.overview}</p>
+          <p className="my-6">{movie.overview}</p>
 
-          <div className="flex flex-col items-center justify-center text-sm">
-              <p>Idioma: {movie.original_language}</p>
-              <p>Titulo original: {movie.title}</p>
-              <p>Poster maior: {movie.popularity}</p>
-              <p><strong>Data de Lançamento:</strong> {movie.release_date}</p>
-              <p><strong>Nota:</strong> {movie.vote_average}</p>
+          <div className="flex flex-col mt-2">
+            <p>
+              <strong>Idioma:</strong> {movie.original_language}
+            </p>
+            <p>
+              <strong>Titulo original:</strong> {movie.title}
+            </p>
+            <p>
+              <strong>Poster maior:</strong> {movie.popularity}
+            </p>
+            <p>
+              <strong>Data de Lançamento:</strong> {movie.release_date}
+            </p>
+            <p>
+              <strong>Nota:</strong> {movie.vote_average}
+            </p>
           </div>
         </div>
       </div>

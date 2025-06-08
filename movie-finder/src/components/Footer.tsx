@@ -1,8 +1,8 @@
 export default function Footer () {
 
     return (
-        <footer className="fixed bottom-0 flex items-center justify-center">
-            <p>Desenvolvido por Mário Matias</p>
+        <footer className="bg-[#060606] w-full py-4 text-sm flex items-center justify-center">
+            <p>Desenvolvido por Mário Matias 2025</p>
         </footer>
     )
 }

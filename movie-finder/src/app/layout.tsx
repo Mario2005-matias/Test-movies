@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import RouteProgress from '@/components/RouteProgress';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +18,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${inter.className} bg-[#060606] text-white min-h-screen`}
+        className={`${inter.className} bg-[#020d19] text-white min-h-screen`}
       >
+        <RouteProgress />
         {children}
       </body>
     </html>

@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import { Suspense } from "react"
 import Link from "next/link";
-import Styles from "../app/page.module.css"
+import Styles from "../app/page.module.css";
 
 export default function Movies() {
   const [query, setQuery] = useState("");
@@ -16,34 +16,43 @@ export default function Movies() {
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
   const handleSearch = async () => {
-    if (!query) return alert("Preencha o campo!!");
-    setLoading(true);
-    setError("");
-    try {
-      const res = await axios.get("https://api.themoviedb.org/3/search/movie", {
-        params: {
-          api_key: API_KEY,
-          query: query,
-          language: "pt-BR",
-          include_adult: false,
-        },
-      });
-      if (res.data.results.length > 0) {
-        setMovies(res.data.results);
-      } else {
-        setError("Filme não encontrado");
-        setMovies([]);
+  if (!query) return;
+  setLoading(true);
+  setError("");
+
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&language=pt-BR&include_adult=false`,
+      {
+        cache: "force-cache", 
+        next: { revalidate: 60 } 
       }
-    } catch (err) {
-      console.log(err);
-      setError("Erro ao buscar filmes");
+    );
+
+    if (!res.ok) throw new Error("Erro na resposta da API");
+
+    const data = await res.json();
+
+    if (data.results.length > 0) {
+      setMovies(data.results);
+    } else {
+      setError("Filme não encontrado");
+      setMovies([]);
     }
-    setLoading(false);
-  };
+  } catch (err) {
+    setError("Erro ao buscar filmes");
+  }
+
+  setLoading(false);
+};
+
 
   return (
     <div className="p-4 max-w-4xl mx-auto ">
-      <p className="text-center text-sm">Pronto para assistir? Aproveita desfrutar os melhores filmes de forma grátis</p>
+      <p className="text-center text-sm">
+        Pronto para assistir? Desfrute dos melhores filmes de forma grátis e
+        segura
+      </p>
       <div className="flex gap-2 my-4">
         <input
           type="text"
@@ -55,35 +64,41 @@ export default function Movies() {
         <button
           onClick={handleSearch}
           className="bg-red-600 flex flex-row gap-2 items-center justify-center text-white px-4 rounded  hover:bg-red-700 hover:duration-300"
-          >
+        >
           Buscar
         </button>
       </div>
-      {loading && <p>Carregando...</p>}
-      {error && <p className="text-red-600">{error}</p>}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {loading && (
+        <div>
+          <p>Carregando...</p>
+        </div>
+      )}
+      {error && (
+        <div>
+          <p className="text-red-600">{error}</p>
+        </div>
+      )}
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-10">
         {movies.map((movie) => (
           <div
             key={movie.id}
-            className="border rounded overflow-hidden shadow hover:scale-105 transition"
+            className="bg-black border rounded overflow-hidden shadow hover:scale-105 transition"
           >
-            <Suspense fallback={<p>Carregando...</p>}>
-              <Image
-                src={
-                  movie.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                    : "/placeholder.png"
-                }
-                width={500}
-                height={750}
-                alt={movie.title}
-                className="w-full h-72 object-cover"
-                />
-            </Suspense>
+            <Image
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : "/placeholder.png"
+              }
+              width={500}
+              height={750}
+              alt={movie.title}
+              className="w-full h-60 object-cover"
+            />
             <div className="p-2">
               <h2 className="font-bold">{movie.title}</h2>
-              <p>{movie.release_date}</p>
+              <p>{movie.release_date?.slice(0, 4)}</p>
             </div>
             <Link href={`/movie/${movie.id}`}>
               <span className="text-blue-600 underline p-2 block">
