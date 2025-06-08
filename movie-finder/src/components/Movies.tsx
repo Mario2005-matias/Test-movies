@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Movies() {
   const [query, setQuery] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [movies, setMovies] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -26,6 +27,7 @@ export default function Movies() {
           include_adult: false,
         },
       });
+      console.log(res.data.results)
 
       if (res.data.results.length > 0) {
         setMovies(res.data.results);
@@ -43,7 +45,9 @@ export default function Movies() {
 
   return (
     <main className="p-4 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4 text-center">🎬 MovieFinder (TMDb)</h1>
+      <h1 className="text-3xl font-bold mb-4 text-center">
+        🎬 MovieFinder (TMDb)
+      </h1>
       <div className="flex gap-2 mb-4">
         <input
           type="text"
@@ -83,6 +87,11 @@ export default function Movies() {
               <h2 className="font-bold">{movie.title}</h2>
               <p>{movie.release_date}</p>
             </div>
+            <Link href={`/movie/${movie.id}`}>
+              <span className="text-blue-600 underline p-2 block">
+                Detalhes
+              </span>
+            </Link>
           </div>
         ))}
       </div>
