@@ -1,0 +1,10 @@
+.bgImage {
+    background-image: url("../../public/assets/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.input {
+    background-color: rgba(0, 0, 0, 0.432);
+}
