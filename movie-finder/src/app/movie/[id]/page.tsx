@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Header from "../components/Header";
-import { FaCalendar, FaStar } from "react-icons/fa";
-import { FaUser, FaChild } from "react-icons/fa";
+import { FaCalendar, FaStar, FaUser, FaChild } from "react-icons/fa";
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 async function getMovie(id: string) {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`
-  );
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`, {
+    cache: "force-cache",
+    next: { revalidate: 60 },
+  });
 
   if (!res.ok) return null;
   return res.json();
@@ -26,7 +26,7 @@ export default async function MoviePage({
   return (
     <div className="w-full min-h-screen flex flex-col items-center">
       <Header />
-      <div className="w-full h-full flex flex-row flex-wrap justify-center gap-6 pt-10">
+      <div className="w-full h-full flex flex-row flex-wrap justify-center gap-6 pt-10 pb-10">
         <Image
           src={
             movie.poster_path
@@ -73,7 +73,7 @@ export default async function MoviePage({
 
           <div className="flex flex-col mt-2">
             <p>
-              <strong>Idioma:</strong> {movie.original_language}
+              <strong>Idioma:</strong> {movie.original_language === "en" ? "Inglês": "Português"}
             </p>
             <p>
               <strong>Titulo original:</strong> {movie.title}
