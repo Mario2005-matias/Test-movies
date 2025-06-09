@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from "next/link"
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
@@ -21,7 +22,7 @@ export default function Header() {
                     <p className="text-red-600 text-2xl font-bold -mb-2">Movie</p>
                     <span className="text-sm">Finder</span>
                 </div>
-                <button className="bg-red-600 rounded-md px-4 py-2 text-sm hover:bg-red-700 hover:duration-300">Entrar</button>
+                <Link href="/ca" className="bg-red-600 rounded-md px-4 py-2 text-sm hover:bg-red-700 hover:duration-300">Entrar</Link>
             </div>
         </header>
     );
