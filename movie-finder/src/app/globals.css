@@ -2,12 +2,9 @@
 html {
   scroll-behavior: smooth;
 }
-body {
-  font-family: "Roboto";
-}
 #nprogress {
   pointer-events: none;
 }
 #nprogress .bar {
-  @apply bg-gradient-to-r from-blue-500 to-purple-500 h-1 transition-all duration-300 ease-in-out;
+  @apply  fixed top-0 left-0 w-full h-1 z-50 bg-red-500 transition-all duration-100 ease-in-out;
 }

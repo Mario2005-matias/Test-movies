@@ -11,7 +11,7 @@ export default function Header() {
         </div>
         <Link
           href="/"
-          className="bg-red-600 text-white rounded-md py-2 px-4 flex flex-row items-center justify-center gap-2 hover:bg-red-800 hover:duration-300 hover:scale-100 text-sm"
+          className="bg-red-600 text-white rounded-md py-2 px-4 flex flex-row items-center justify-center gap-2 hover:bg-red-800 hover:duration-300 hover:scale-100 text-sm hover:gap-1 duration-300"
         >
           <ArrowLeft className="w-4 h-4" />
           Voltar

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from 'next/font/google'
 import "./globals.css";
 import RouteProgress from '@/components/RouteProgress';
 import 'react-toastify/dist/ReactToastify.css';
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600'] })
+
 
 export const metadata: Metadata = {
   title: "MovieFinder",
@@ -19,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${inter.className} bg-[#020d19] text-white min-h-screen`}
+        className={`${poppins.className} bg-[#020d19] text-white min-h-screen`}
       >
         <RouteProgress />
         {children}
