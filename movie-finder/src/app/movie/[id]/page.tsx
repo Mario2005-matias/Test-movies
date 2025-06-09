@@ -18,15 +18,10 @@ async function getMovie(id: string) {
   return res.json();
 }
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
+type Params = Promise<{id: string}>
 
-
-export default async function MoviePage({ params }: PageProps) {
-  const { id } = params;
+export default async function MoviePage({ params }: { params: Params }) {
+  const { id } = await params
   const movie = await getMovie(id);
   if (!movie) return notFound();
 
