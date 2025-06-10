@@ -16,8 +16,6 @@ export default function Movies() {
   const [movies, setMovies] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-
   const handleSearch = async () => {
     if (!query) {
       toast.warn("Digite algo para buscar!");
@@ -28,7 +26,7 @@ export default function Movies() {
 
     try {
       const res = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${encodeURIComponent(
           query
         )}&language=pt-BR&include_adult=false`,
         {
@@ -62,17 +60,18 @@ export default function Movies() {
         segura
       </p>
 
-      <div className="flex items-center justify-center gap-2 my-4 ">
+      <div className="flex items-center justify-center gap-2 my-4 max-sm:flex-col">
         <input
           type="text"
           placeholder="Buscar filme..."
           value={query}
+          aria-label="insira o nome so filme"
           onChange={(e) => setQuery(e.target.value)}
-          className={`${Styles.input} flex-1 py-2 px-3 rounded border border-gray-500 outline-none backdrop-blur-xs`}
+          className={`${Styles.input} max-sm:w-full flex-1 py-2 px-3 rounded border border-gray-500 outline-none backdrop-blur-xs`}
         />
         <button
           onClick={handleSearch}
-          className="bg-red-600 flex flex-row gap-2 items-center justify-center text-white px-4 py-2 rounded hover:bg-red-700 hover:duration-300"
+          className="bg-red-600 flex flex-row gap-2 items-center justify-center text-white px-4 py-2 rounded hover:bg-red-700 hover:duration-300 max-sm:w-full"
         >
           Buscar
         </button>

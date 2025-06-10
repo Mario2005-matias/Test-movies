@@ -19,10 +19,8 @@ export default function Home() {
       shallowRouting
     >
         <Header />
-        <main
-          className={`${Styles.bgImage} w-full min-h-screen flex flex-col items-center justify-center`}
-        >
-          <h1 className="max-w-xl text-4xl sm:text-5xl text-center mt-20 text-white font-bold px-4">
+        <main className={`${Styles.bgImage} w-full min-h-screen flex flex-col items-center justify-center pt-15`} >
+          <h1 className="max-w-xl text-4xl sm:text-5xl text-center text-white font-bold px-4">
             Filmes, programas de TV e muito mais ilimitados
           </h1>
           <Movies />
