@@ -22,7 +22,7 @@ export default function Home() {
         <main
           className={`${Styles.bgImage} w-full min-h-screen flex flex-col items-center justify-center`}
         >
-          <h1 className="max-w-xl text-4xl sm:text-5xl text-center mt-20 text-white font-bold px-5">
+          <h1 className="max-w-xl text-4xl sm:text-5xl text-center mt-20 text-white font-bold px-4">
             Filmes, programas de TV e muito mais ilimitados
           </h1>
           <Movies />
