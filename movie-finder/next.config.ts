@@ -3,8 +3,15 @@ const nextConfig = {
   images: {
     domains: ['image.tmdb.org'],
   },
-  env: {
-    NEXT_PUBLIC_TMDB_API_KEY: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+        ],
+      },
+    ];
   },
 };
 
